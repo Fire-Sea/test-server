@@ -25,5 +25,13 @@ public class TextMessageService {
         return textMessageRepository.findAll(pageable);
     }
 
+    public Page<TextMessage> findByCategory(String category, Pageable pageable) {
+        return textMessageRepository.findByCategory(category, pageable);
+    }
+
+    public TextMessage findByCategoryAndId(String category, int id) {
+
+        return textMessageRepository.findByCategoryAndId(category, id);
+    }
 }
 

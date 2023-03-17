@@ -10,5 +10,7 @@ import java.util.List;
 
 public interface TextMessageRepository extends JpaRepository<TextMessage, Integer> {
 
+    Page<TextMessage> findByCategory(String category, Pageable pageable);
 
+    TextMessage findByCategoryAndId(String category, int id);
 }
