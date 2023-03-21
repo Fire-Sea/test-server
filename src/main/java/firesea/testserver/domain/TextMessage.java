@@ -24,11 +24,13 @@ public class TextMessage extends JpaBaseEntity {
 
     String category;
 
+    String nickname;
 
-    public TextMessage(String textTitle, String textBody, String category) {
+    public TextMessage(String textTitle, String textBody, String category, String nickname) {
         this.textTitle = textTitle;
         this.textBody = textBody;
         this.category = category;
+        this.nickname = nickname;
     }
 
 }
