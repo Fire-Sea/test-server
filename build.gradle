@@ -44,6 +44,11 @@ dependencies {
 	//querydsl 추가2
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+
+	//jwt 토큰
+	implementation("com.auth0:java-jwt:4.2.0")
+
+
 }
 
 tasks.named('test') {

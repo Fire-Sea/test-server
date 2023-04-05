@@ -7,7 +7,7 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 
     public int countMemberByUsername(String username);
 
-    public Member findByUsername(String username);
+    public Member findMemberByUsername(String username);
 
     int countMemberByNickname(String nickname);
 }

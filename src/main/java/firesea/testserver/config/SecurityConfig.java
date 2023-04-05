@@ -29,6 +29,7 @@ public class SecurityConfig {
         //우선 모든 요청에 대해 허용 중
         http.authorizeRequests()
                 .anyRequest().permitAll();
+
         return http.build();
     }
 }

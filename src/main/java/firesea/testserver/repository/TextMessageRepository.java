@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface TextMessageRepository extends JpaRepository<TextMessage, Integer> {
+public interface TextMessageRepository extends JpaRepository<TextMessage, Integer>, TextMessageRepositoryCustom {
 
     Page<TextMessage> findByCategory(String category, Pageable pageable);
 

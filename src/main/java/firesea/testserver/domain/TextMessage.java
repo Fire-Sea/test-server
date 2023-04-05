@@ -2,14 +2,14 @@ package firesea.testserver.domain;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
-@Data
+import java.util.Date;
+
+@Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TextMessage extends JpaBaseEntity {
@@ -24,14 +24,43 @@ public class TextMessage extends JpaBaseEntity {
 
     String category;
 
-    String nickname;
+    Boolean deleteTrue = false;
 
-    public TextMessage(String textTitle, String textBody, String category, String nickname) {
+    LocalDateTime deleteTime = null;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="member_username")
+    Member member;
+
+    public TextMessage(String textTitle, String textBody, String category) {
         this.textTitle = textTitle;
         this.textBody = textBody;
         this.category = category;
-        this.nickname = nickname;
+        this.deleteTrue = false;
+        this.deleteTime = null;
     }
+
+
+
+    /**
+     * 편의 메서드
+     */
+    public void updateMember(Member member) {
+        this.member = member;
+
+    }
+
+    public void updateTextMessage(String textTitle, String textBody) {
+
+        this.textTitle = textTitle;
+        this.textBody = textBody;
+    }
+
+    public void delete(int id) {
+        this.deleteTrue = true;
+        this.deleteTime = LocalDateTime.now();
+    }
+
 
 }
 

@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
@@ -39,19 +41,26 @@ public class MemberService {
     }
 
 
-    public String login(Member member) {
-        Member savedMember = memberRepository.findByUsername(member.getUsername());
-        String result ="";
+    public Optional<Map> login(Member member) {
+        Member savedMember = memberRepository.findMemberByUsername(member.getUsername());
 
         if (savedMember == null) {
-            return result;
+            return Optional.empty();
         }
 
         log.info("member.getPassword={}, savedMember.getPassword = {}", member.getPassword(), savedMember.getPassword());
         if (member.getPassword().equals(savedMember.getPassword())) {
-            result = savedMember.getNickname();
+
+            String username = savedMember.getUsername();
+            String nickname = savedMember.getNickname();
+            Map<String, String> map = new HashMap<>();
+            map.put("username", username);
+            map.put("nickname", nickname);
+            log.info(username);
+            log.info(nickname);
+            return Optional.of(map);
         }
 
-        return result;
+        return Optional.empty();
     }
 }

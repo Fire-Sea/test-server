@@ -18,7 +18,12 @@ public class CorsConfig {
         config.addAllowedHeader("*"); //모든 header에 응답을 허용하겠다.
         config.addAllowedOriginPattern("*"); //모든 ip에 응답을 허용하겠다
         config.addAllowedMethod("*"); //모든 http 메서드 요청을 허용하겠다.
+        config.addExposedHeader("access_token");
+        config.addExposedHeader("refresh_token");
+        config.addExposedHeader("Set-Cookie");
+
         source.registerCorsConfiguration("/api/**",config);
+
         return new CorsFilter(source);
     }
 }
