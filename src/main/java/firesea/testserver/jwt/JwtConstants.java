@@ -14,7 +14,7 @@ public class JwtConstants {
     //refresh Token 만료 시간 : 30분
     public static final long RT_EXP_TIME =  30 * MINUTE;
 
-    // Secret
+    // Secretg
     public static final String JWT_SECRET_AT = "firesea test server 1";
     public static final String JWT_SECRET_RT = "firesea test server 2";
 
