@@ -2,6 +2,7 @@ package firesea.testserver.service;
 
 import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
 import firesea.testserver.domain.Member;
+import firesea.testserver.error.DuplicateNickname;
 import firesea.testserver.repository.MemberRepository;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -62,5 +63,23 @@ public class MemberService {
         }
 
         return Optional.empty();
+    }
+
+    @Transactional
+    public boolean changeNickname(String username, String newNickname) {
+
+        int i = memberRepository.countMemberByNickname(newNickname);
+        if (i != 0) {
+            throw new DuplicateNickname("중복된 닉네임. 사용 불가");
+        }
+
+        Member savedMember = memberRepository.findMemberByUsername(username);
+        savedMember.updateNickname(newNickname);
+
+        return true;
+    }
+
+    public int getTmCnt(String username) {
+        return memberRepository.findCnt(username);
     }
 }

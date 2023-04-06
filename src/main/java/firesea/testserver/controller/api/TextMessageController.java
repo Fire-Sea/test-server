@@ -27,15 +27,13 @@ public class TextMessageController {
     public DefaultRes<TextMessage> send(@RequestBody TextMessageDto textMessageDto, HttpServletRequest request) {
         log.info("textMessage.title = {}, textMessage.body={}, category={}", textMessageDto.getTextTitle(), textMessageDto.getTextBody(), textMessageDto.getCategory());
 
-
         //token에서 가져온 데이터
         String username = (String) request.getAttribute("username");
         String nickname = (String) request.getAttribute("nickname");
-//        textMessage.updateNickname(nickname);
 
         TextMessage textMessage = new TextMessage(textMessageDto.getTextTitle(), textMessageDto.getTextBody(), textMessageDto.getCategory());
-
         textMessageService.save(textMessage, username);
+
         return DefaultRes.res(20000, "저장 완료");
     }
 
@@ -49,24 +47,31 @@ public class TextMessageController {
 
 
     @GetMapping("/api/list")
-    public PageCustomDto<TextMessageTitleDto> list(@RequestParam String category, @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+    public PageCustomDto<TextMessageTitleDto> list(@RequestParam String category, @PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         log.info("페이징 시작");
         PageCustomDto<TextMessageTitleDto> mainPageList = textMessageService.getMainPageList(category, pageable);
         return mainPageList;
+    }
+
+    @GetMapping("/api/user/list")
+    public PageCustomDto<UserTextMessageTitleDto> userTmList(HttpServletRequest request, @PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        String username = (String) request.getAttribute("username");
+        PageCustomDto<UserTextMessageTitleDto> userTmList = textMessageService.getUserTmList(username, pageable);
+        return userTmList;
     }
 
     @GetMapping("/api/detail")
     public TextMessageDetailDto detail(@RequestParam String category, int id) {
         log.info("글 자세히 보기");
         TextMessage textMessage = textMessageService.detailTextMessage(category, id);
-        String nickname = textMessage.getMember().getNickname(); //강제 초기화
+//        String nickname = textMessage.getMember().getNickname(); //강제 초기화
 
         TextMessageDetailDto detailDto = TextMessageDetailDto.builder()
                 .id(textMessage.getId())
                 .textTitle(textMessage.getTextTitle())
                 .textBody(textMessage.getTextBody())
                 .createdTime(textMessage.getCreatedTime())
-                .nickname(nickname)
+                .nickname(textMessage.getMember().getNickname())
                 .build();
 
         return detailDto;
@@ -88,20 +93,14 @@ public class TextMessageController {
 
     @PatchMapping("/api/user/update")
     public DefaultRes update(@RequestParam int id, HttpServletRequest request, @RequestBody TextMessageDto dto) {
-        String username = request.getParameter("username");
-        log.info("dto.getTextTitle = {}", dto.getTextTitle());
-        log.info("dto.getTextBody = {}", dto.getTextBody());
-
         textMessageService.update(id , dto.getTextTitle(), dto.getTextBody());
-
         return DefaultRes.res(20015, "업데이트 성공");
     }
 
     @DeleteMapping("/api/user/delete")
     public DefaultRes delete(@RequestParam int id, HttpServletRequest request) {
-        String username = request.getParameter("username");
-
-        textMessageService.delete(id);
+        String username = (String) request.getAttribute("username");
+        textMessageService.delete(username, id);
         return DefaultRes.res(20016, "삭제 성공");
     }
 

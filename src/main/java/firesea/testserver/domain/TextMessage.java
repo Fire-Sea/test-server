@@ -1,9 +1,6 @@
 package firesea.testserver.domain;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,7 +9,8 @@ import java.util.Date;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class TextMessage extends JpaBaseEntity {
+@EqualsAndHashCode
+public class TextMessage extends JpaBaseTimeEntity {
 
     @Id @GeneratedValue
     @Column(name = "textId")
@@ -47,7 +45,6 @@ public class TextMessage extends JpaBaseEntity {
      */
     public void updateMember(Member member) {
         this.member = member;
-
     }
 
     public void updateTextMessage(String textTitle, String textBody) {
@@ -56,7 +53,7 @@ public class TextMessage extends JpaBaseEntity {
         this.textBody = textBody;
     }
 
-    public void delete(int id) {
+    public void delete() {
         this.deleteTrue = true;
         this.deleteTime = LocalDateTime.now();
     }

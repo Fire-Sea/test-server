@@ -30,6 +30,17 @@ public class TextMessageRepositoryImpl implements TextMessageRepositoryCustom {
     }
 
     @Override
+    public TextMessage findDetailTextMessage(int id) {
+        TextMessage textMessage = queryFactory
+                .selectFrom(QTextMessage.textMessage)
+                .join(QTextMessage.textMessage.member, member).fetchJoin()
+                .where(QTextMessage.textMessage.id.eq(id))
+                .fetchOne();
+        return textMessage;
+
+    }
+
+    @Override
     public Page<TextMessageTitleDto> getMainPageList(String category, Pageable pageable) {
         List<TextMessageTitleDto> content = queryFactory
                 .select(Projections.bean(TextMessageTitleDto.class, textMessage.id.as("id"), textMessage.textTitle, textMessage.createdTime, member.nickname))

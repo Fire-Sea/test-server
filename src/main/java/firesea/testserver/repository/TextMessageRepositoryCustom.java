@@ -9,4 +9,6 @@ import org.springframework.data.domain.Pageable;
 public interface TextMessageRepositoryCustom {
 
     Page<TextMessageTitleDto> getMainPageList(String category, Pageable pageable);
+
+    TextMessage findDetailTextMessage(int id);
 }

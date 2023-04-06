@@ -3,10 +3,7 @@ package firesea.testserver.service;
 import com.fasterxml.classmate.MemberResolver;
 import com.querydsl.core.Tuple;
 import firesea.testserver.controller.api.TextMessageController;
-import firesea.testserver.domain.Member;
-import firesea.testserver.domain.PageCustomDto;
-import firesea.testserver.domain.TextMessage;
-import firesea.testserver.domain.TextMessageTitleDto;
+import firesea.testserver.domain.*;
 import firesea.testserver.repository.MemberRepository;
 import firesea.testserver.repository.TextMessageRepository;
 import lombok.RequiredArgsConstructor;
@@ -65,14 +62,21 @@ public class TextMessageService {
 
     public TextMessage detailTextMessage(String category, int id) {
 
-        TextMessage byCategoryAndId = textMessageRepository.findByCategoryAndId(category, id);
+        
+//        TextMessage byCategoryAndId = textMessageRepository.findByCategoryAndId(category, id);
+
+        //페치 조인 적용
+        TextMessage textMessage = textMessageRepository.findDetailTextMessage(id);
+
+
+
 //        Member member = byCategoryAndId.getMember();
 //        log.info("member.username = {}", member.getUsername());
 //        log.info("member.nickname = {}", member.getNickname());
 //
 //        log.info("memebr = {}", byCategoryAndId.getMember());
 
-        return byCategoryAndId;
+        return textMessage;
     }
 
     @Transactional
@@ -84,9 +88,18 @@ public class TextMessageService {
     }
 
     @Transactional
-    public void delete(int id) {
+    public void delete(String username, int id) {
         TextMessage textMessage = textMessageRepository.findById(id).get();
-        textMessage.delete(id);
+        Member savedMember = memberRepository.findMemberByUsername(username);
+        savedMember.deleteTextMessage(textMessage);
+
+    }
+
+    public PageCustomDto<UserTextMessageTitleDto> getUserTmList(String username, Pageable pageable) {
+        Page<UserTextMessageTitleDto> userTmList = memberRepository.getUserTmList(username, pageable);
+       return new PageCustomDto<UserTextMessageTitleDto>(
+                userTmList.getContent(), userTmList.getTotalPages(), userTmList.getTotalElements(), userTmList.getSize()
+        );
 
     }
 }

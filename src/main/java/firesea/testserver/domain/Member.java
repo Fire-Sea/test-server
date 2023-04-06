@@ -30,6 +30,8 @@ public class Member extends JpaBaseTimeEntity implements Persistable<String> {
 
     String refreshToken;
 
+    int cnt;
+
     @OneToMany(mappedBy = "member")
     List<TextMessage> textList = new ArrayList<>();
 
@@ -43,6 +45,7 @@ public class Member extends JpaBaseTimeEntity implements Persistable<String> {
         this.password = password;
         this.email = email;
         this.nickname = nickname;
+        this.cnt = 0;
     }
 
 
@@ -51,10 +54,14 @@ public class Member extends JpaBaseTimeEntity implements Persistable<String> {
      */
     public TextMessage createTextMessage(TextMessage textMessage) {
         this.textList.add(textMessage);
+        this.cnt++;
         textMessage.updateMember(this);
         return textMessage;
     }
 
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
 
     /*
@@ -71,5 +78,9 @@ public class Member extends JpaBaseTimeEntity implements Persistable<String> {
     }
 
 
-
+    public void deleteTextMessage(TextMessage textMessage) {
+        this.cnt--;
+        this.textList.remove(textMessage);
+        textMessage.delete();
+    }
 }

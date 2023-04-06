@@ -112,8 +112,30 @@ public class MemberInfoController {
         return defaultRes;
     }
 
+    @GetMapping("/api/user/changeNickname")
+    public DefaultRes changeNickname(@RequestParam String newNickname, HttpServletRequest request) {
+
+        String username = (String) request.getAttribute("username");
+
+        log.info("username = {}", username);
+        log.info("nickname = {}", newNickname);
+        boolean success = memberService.changeNickname(username, newNickname);
+        return DefaultRes.res(20017, "닉네임 변경 성공", newNickname);
+    }
+
+    @GetMapping("/api/user/tmCnt")
+    public DefaultRes<Integer> getTmCnt(HttpServletRequest request) {
+        String username = (String) request.getAttribute("username");
+        int cnt = memberService.getTmCnt(username);
+
+        return DefaultRes.res(20018, "글 갯수", cnt);
+    }
+
+
+
     @GetMapping("/api/user/test")
     public String test(HttpServletRequest request) {
+
         String requestURI = request.getRequestURI();
 
         return "success :  " + requestURI;
@@ -122,6 +144,7 @@ public class MemberInfoController {
 
     @GetMapping("/cookie/text")
     public String test2(HttpServletRequest request, HttpServletResponse response) {
+
         String requestURI = request.getRequestURI();
 
 
