@@ -1,6 +1,7 @@
 package firesea.testserver.domain;
 
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode
+@Slf4j
 public class TextMessage extends JpaBaseTimeEntity {
 
     @Id @GeneratedValue
@@ -26,6 +28,12 @@ public class TextMessage extends JpaBaseTimeEntity {
 
     LocalDateTime deleteTime = null;
 
+    int views;
+
+    int likes;
+    int dislikes;
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="member_username")
     Member member;
@@ -36,6 +44,9 @@ public class TextMessage extends JpaBaseTimeEntity {
         this.category = category;
         this.deleteTrue = false;
         this.deleteTime = null;
+        this.views = 0;
+        this.likes = 0;
+        this.dislikes = 0;
     }
 
 
@@ -58,6 +69,19 @@ public class TextMessage extends JpaBaseTimeEntity {
         this.deleteTime = LocalDateTime.now();
     }
 
+    public void increaseViews() {
+        this.views++;
+    }
 
+    public void increaseLike() {
+        this.likes++;
+        log.info("likes= {}", likes);
+    }
+
+    public void increaseDislike() {
+        this.dislikes++;
+        log.info("dislikes = {}",dislikes);
+
+    }
 }
 

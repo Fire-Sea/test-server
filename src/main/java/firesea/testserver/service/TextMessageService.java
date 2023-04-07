@@ -60,6 +60,7 @@ public class TextMessageService {
         return customPage;
     }
 
+    @Transactional
     public TextMessage detailTextMessage(String category, int id) {
 
         
@@ -67,8 +68,7 @@ public class TextMessageService {
 
         //페치 조인 적용
         TextMessage textMessage = textMessageRepository.findDetailTextMessage(id);
-
-
+        textMessage.increaseViews();
 
 //        Member member = byCategoryAndId.getMember();
 //        log.info("member.username = {}", member.getUsername());
@@ -97,10 +97,11 @@ public class TextMessageService {
 
     public PageCustomDto<UserTextMessageTitleDto> getUserTmList(String username, Pageable pageable) {
         Page<UserTextMessageTitleDto> userTmList = memberRepository.getUserTmList(username, pageable);
-       return new PageCustomDto<UserTextMessageTitleDto>(
+       return new PageCustomDto<>(
                 userTmList.getContent(), userTmList.getTotalPages(), userTmList.getTotalElements(), userTmList.getSize()
         );
-
     }
+
+
 }
 

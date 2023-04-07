@@ -1,6 +1,7 @@
 package firesea.testserver.controller.api;
 
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.NullExpression;
 import com.querydsl.core.types.QTuple;
 import firesea.testserver.domain.*;
 import firesea.testserver.service.TextMessageService;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.net.http.HttpHeaders;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -72,6 +76,9 @@ public class TextMessageController {
                 .textBody(textMessage.getTextBody())
                 .createdTime(textMessage.getCreatedTime())
                 .nickname(textMessage.getMember().getNickname())
+                .views(textMessage.getViews())
+                .likes(textMessage.getLikes())
+                .dislikes(textMessage.getDislikes())
                 .build();
 
         return detailDto;
@@ -87,13 +94,16 @@ public class TextMessageController {
         public String textBody;
         public LocalDateTime createdTime;
         public String nickname;
+        public int views;
+        public int likes;
+        public int dislikes;
 
     }
 
 
     @PatchMapping("/api/user/update")
     public DefaultRes update(@RequestParam int id, HttpServletRequest request, @RequestBody TextMessageDto dto) {
-        textMessageService.update(id , dto.getTextTitle(), dto.getTextBody());
+        textMessageService.update(id, dto.getTextTitle(), dto.getTextBody());
         return DefaultRes.res(20015, "업데이트 성공");
     }
 
@@ -103,5 +113,9 @@ public class TextMessageController {
         textMessageService.delete(username, id);
         return DefaultRes.res(20016, "삭제 성공");
     }
+
+
+
+
 
 }

@@ -30,6 +30,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
     @Override
     public int findCnt(String username) {
 
+
         Integer cnt = queryFactory
                 .select(member.cnt)
                 .from(member)
@@ -42,7 +43,8 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
     public Page<UserTextMessageTitleDto> getUserTmList(String username, Pageable pageable) {
         List<UserTextMessageTitleDto> list = queryFactory
                 .select(Projections.bean(UserTextMessageTitleDto.class,
-                        textMessage.id, textMessage.textTitle, textMessage.createdTime, member.nickname, textMessage.category))
+                        textMessage.id, textMessage.textTitle, textMessage.createdTime,
+                        member.nickname, textMessage.category, textMessage.views, textMessage.likes))
                 .from(textMessage)
                 .join(textMessage.member, member)
                 .where(

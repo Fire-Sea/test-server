@@ -14,5 +14,6 @@ public class TextMessageTitleDto {
     public String textTitle;
     public LocalDateTime createdTime;
     public String nickname;
-
+    public int views;
+    public int likes;
 }

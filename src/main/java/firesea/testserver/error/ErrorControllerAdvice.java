@@ -15,4 +15,14 @@ public class ErrorControllerAdvice {
         log.error("[duplicate nickname]", e);
         return DefaultRes.res(40017, e.getMessage());
     }
+
+    @ExceptionHandler(DuplicateLike.class)
+    public DefaultRes duplicateLike(DuplicateLike duplicateLike) {
+        return DefaultRes.res(40018, "이미 좋아요를 눌렀습니다");
+    }
+
+    @ExceptionHandler(DuplicateDislike.class)
+    public DefaultRes duplicateDisLike(DuplicateDislike duplicateDislike) {
+        return DefaultRes.res(40019, "이미 싫어요를 눌렀습니다");
+    }
 }

@@ -4,10 +4,7 @@ import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import firesea.testserver.domain.QMember;
-import firesea.testserver.domain.QTextMessage;
-import firesea.testserver.domain.TextMessage;
-import firesea.testserver.domain.TextMessageTitleDto;
+import firesea.testserver.domain.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,7 +40,10 @@ public class TextMessageRepositoryImpl implements TextMessageRepositoryCustom {
     @Override
     public Page<TextMessageTitleDto> getMainPageList(String category, Pageable pageable) {
         List<TextMessageTitleDto> content = queryFactory
-                .select(Projections.bean(TextMessageTitleDto.class, textMessage.id.as("id"), textMessage.textTitle, textMessage.createdTime, member.nickname))
+                .select(Projections.bean(TextMessageTitleDto.class,
+                        textMessage.id.as("id"), textMessage.textTitle, textMessage.createdTime,
+                        member.nickname, textMessage.views, textMessage.likes
+                ))
                 .from(textMessage)
                 .join(textMessage.member, member)
                 .where(
@@ -70,4 +70,6 @@ public class TextMessageRepositoryImpl implements TextMessageRepositoryCustom {
         return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchOne);
 
     }
+
+
 }

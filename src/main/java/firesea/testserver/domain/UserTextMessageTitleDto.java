@@ -15,5 +15,7 @@ public class UserTextMessageTitleDto {
     public LocalDateTime createdTime;
     public String nickname;
     public String category;
+    public int views;
+    public int likes;
 
 }
