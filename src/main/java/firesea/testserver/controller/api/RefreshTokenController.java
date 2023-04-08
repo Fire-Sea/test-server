@@ -1,6 +1,6 @@
 package firesea.testserver.controller.api;
 
-import firesea.testserver.domain.DefaultRes;
+import firesea.testserver.domain.basic.DefaultRes;
 import firesea.testserver.service.MemberService;
 import firesea.testserver.service.TokenService;
 import lombok.RequiredArgsConstructor;

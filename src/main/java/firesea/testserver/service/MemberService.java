@@ -1,10 +1,8 @@
 package firesea.testserver.service;
 
-import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
-import firesea.testserver.domain.Member;
+import firesea.testserver.domain.entity.Member;
 import firesea.testserver.error.DuplicateNickname;
 import firesea.testserver.repository.MemberRepository;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,11 +1,11 @@
-package firesea.testserver.domain;
+package firesea.testserver.domain.entity;
 
+import firesea.testserver.domain.basic.JpaBaseTimeEntity;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Entity
@@ -32,6 +32,8 @@ public class TextMessage extends JpaBaseTimeEntity {
 
     int likes;
     int dislikes;
+
+    int commentCnt;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -82,6 +84,10 @@ public class TextMessage extends JpaBaseTimeEntity {
         this.dislikes++;
         log.info("dislikes = {}",dislikes);
 
+    }
+
+    public void increaseCommentCnt() {
+        this.commentCnt++;
     }
 }
 

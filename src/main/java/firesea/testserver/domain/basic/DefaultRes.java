@@ -1,4 +1,4 @@
-package firesea.testserver.domain;
+package firesea.testserver.domain.basic;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

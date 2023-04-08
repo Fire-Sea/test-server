@@ -2,9 +2,9 @@ package firesea.testserver.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import firesea.testserver.domain.QMember;
-import firesea.testserver.domain.QTextMessage;
 import firesea.testserver.domain.UserTextMessageTitleDto;
+import firesea.testserver.domain.entity.QMember;
+import firesea.testserver.domain.entity.QTextMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -12,11 +12,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import java.util.List;
 
-import static firesea.testserver.domain.QMember.*;
-import static firesea.testserver.domain.QTextMessage.*;
+import static firesea.testserver.domain.entity.QMember.*;
+import static firesea.testserver.domain.entity.QTextMessage.*;
+
 
 @Slf4j
 public class MemberRepositoryImpl implements MemberRepositoryCustom {
@@ -44,7 +46,8 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
         List<UserTextMessageTitleDto> list = queryFactory
                 .select(Projections.bean(UserTextMessageTitleDto.class,
                         textMessage.id, textMessage.textTitle, textMessage.createdTime,
-                        member.nickname, textMessage.category, textMessage.views, textMessage.likes))
+                        member.nickname, textMessage.category, textMessage.views, 
+                        textMessage.likes, textMessage.dislikes, textMessage.commentCnt ))
                 .from(textMessage)
                 .join(textMessage.member, member)
                 .where(

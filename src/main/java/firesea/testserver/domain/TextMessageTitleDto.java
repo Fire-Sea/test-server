@@ -16,4 +16,6 @@ public class TextMessageTitleDto {
     public String nickname;
     public int views;
     public int likes;
+    public int dislikes;
+    public int commentCnt;
 }

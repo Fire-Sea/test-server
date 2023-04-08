@@ -1,7 +1,7 @@
 package firesea.testserver.settings;
 
-import firesea.testserver.domain.Member;
-import firesea.testserver.domain.TextMessage;
+import firesea.testserver.domain.entity.Member;
+import firesea.testserver.domain.entity.TextMessage;
 import firesea.testserver.service.MemberService;
 import firesea.testserver.service.TextMessageService;
 import lombok.RequiredArgsConstructor;

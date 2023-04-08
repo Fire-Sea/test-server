@@ -17,5 +17,6 @@ public class UserTextMessageTitleDto {
     public String category;
     public int views;
     public int likes;
-
+    public int dislikes;
+    public int commentCnt;
 }

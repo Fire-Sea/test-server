@@ -1,25 +1,19 @@
 package firesea.testserver.controller.api;
 
-import com.querydsl.core.Tuple;
-import com.querydsl.core.types.NullExpression;
-import com.querydsl.core.types.QTuple;
 import firesea.testserver.domain.*;
+import firesea.testserver.domain.basic.DefaultRes;
+import firesea.testserver.domain.basic.PageCustomDto;
+import firesea.testserver.domain.entity.TextMessage;
 import firesea.testserver.service.TextMessageService;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.net.http.HttpHeaders;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Slf4j
 @RestController

@@ -1,12 +1,10 @@
-package firesea.testserver.domain;
+package firesea.testserver.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import firesea.testserver.domain.basic.JpaBaseTimeEntity;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
-import org.w3c.dom.Text;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;

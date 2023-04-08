@@ -1,18 +1,14 @@
 package firesea.testserver.service;
 
-import firesea.testserver.domain.LikeAndDislike;
-import firesea.testserver.domain.TextMessage;
-import firesea.testserver.error.DuplicateDislike;
+import firesea.testserver.domain.entity.LikeAndDislike;
+import firesea.testserver.domain.entity.TextMessage;
 import firesea.testserver.error.DuplicateLike;
 import firesea.testserver.repository.LikeAndDislikeRepository;
-import firesea.testserver.repository.LikeAndDislikeRepositoryImpl;
 import firesea.testserver.repository.TextMessageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.websocket.server.ServerEndpoint;
 
 @Service
 @Slf4j

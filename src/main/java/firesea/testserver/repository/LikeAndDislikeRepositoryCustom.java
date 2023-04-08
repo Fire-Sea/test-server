@@ -1,6 +1,6 @@
 package firesea.testserver.repository;
 
-import firesea.testserver.domain.TextMessage;
+import firesea.testserver.domain.entity.TextMessage;
 
 public interface LikeAndDislikeRepositoryCustom {
 

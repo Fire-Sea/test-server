@@ -1,9 +1,9 @@
 package firesea.testserver.service;
 
-import com.fasterxml.classmate.MemberResolver;
-import com.querydsl.core.Tuple;
-import firesea.testserver.controller.api.TextMessageController;
 import firesea.testserver.domain.*;
+import firesea.testserver.domain.basic.PageCustomDto;
+import firesea.testserver.domain.entity.Member;
+import firesea.testserver.domain.entity.TextMessage;
 import firesea.testserver.repository.MemberRepository;
 import firesea.testserver.repository.TextMessageRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j

@@ -1,21 +1,21 @@
 package firesea.testserver.repository;
 
-import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import firesea.testserver.domain.*;
+import firesea.testserver.domain.entity.QTextMessage;
+import firesea.testserver.domain.entity.TextMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
-import org.w3c.dom.Text;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static firesea.testserver.domain.QMember.*;
-import static firesea.testserver.domain.QTextMessage.*;
+import static firesea.testserver.domain.entity.QMember.*;
+import static firesea.testserver.domain.entity.QTextMessage.*;
 
 @Slf4j
 public class TextMessageRepositoryImpl implements TextMessageRepositoryCustom {
@@ -42,7 +42,7 @@ public class TextMessageRepositoryImpl implements TextMessageRepositoryCustom {
         List<TextMessageTitleDto> content = queryFactory
                 .select(Projections.bean(TextMessageTitleDto.class,
                         textMessage.id.as("id"), textMessage.textTitle, textMessage.createdTime,
-                        member.nickname, textMessage.views, textMessage.likes
+                        member.nickname, textMessage.views, textMessage.likes , textMessage.dislikes, textMessage.commentCnt
                 ))
                 .from(textMessage)
                 .join(textMessage.member, member)

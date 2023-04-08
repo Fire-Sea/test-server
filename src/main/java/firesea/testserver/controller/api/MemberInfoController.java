@@ -1,7 +1,7 @@
 package firesea.testserver.controller.api;
 
-import firesea.testserver.domain.DefaultRes;
-import firesea.testserver.domain.Member;
+import firesea.testserver.domain.basic.DefaultRes;
+import firesea.testserver.domain.entity.Member;
 import firesea.testserver.jwt.JwtFactory;
 import firesea.testserver.service.MemberService;
 import firesea.testserver.service.TokenService;

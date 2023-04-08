@@ -1,14 +1,11 @@
 package firesea.testserver.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import firesea.testserver.domain.QLikeAndDislike;
-import firesea.testserver.domain.TextMessage;
-import lombok.RequiredArgsConstructor;
+import firesea.testserver.domain.entity.TextMessage;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
-import static firesea.testserver.domain.QLikeAndDislike.*;
+import static firesea.testserver.domain.entity.QLikeAndDislike.*;
 
 public class LikeAndDislikeRepositoryImpl implements LikeAndDislikeRepositoryCustom {
 

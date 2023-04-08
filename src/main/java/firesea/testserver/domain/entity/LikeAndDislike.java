@@ -1,10 +1,9 @@
-package firesea.testserver.domain;
+package firesea.testserver.domain.entity;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.w3c.dom.Text;
 
 import javax.persistence.*;
 

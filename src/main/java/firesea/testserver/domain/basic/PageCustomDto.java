@@ -1,4 +1,4 @@
-package firesea.testserver.domain;
+package firesea.testserver.domain.basic;
 
 import lombok.Data;
 
@@ -17,4 +17,5 @@ public class PageCustomDto<T> {
         this.totalElements = totalElements;
         this.size = size;
     }
+
 }

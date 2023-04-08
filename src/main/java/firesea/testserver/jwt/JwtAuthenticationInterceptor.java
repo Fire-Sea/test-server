@@ -1,24 +1,5 @@
 package firesea.testserver.jwt;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import firesea.testserver.domain.DefaultRes;
-import firesea.testserver.domain.Member;
-import lombok.Builder;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.servlet.HandlerInterceptor;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.html.Option;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
-import static firesea.testserver.jwt.JwtConstants.*;
 /*
 @RequiredArgsConstructor
 @Slf4j
