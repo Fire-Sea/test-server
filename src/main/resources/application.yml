@@ -7,5 +7,7 @@ spring:
         - db-local
       prod:
         - db-aws
+      docker-local:
+        - db-docker-local
     include:
       - db
