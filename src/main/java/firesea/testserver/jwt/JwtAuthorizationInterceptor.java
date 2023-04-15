@@ -30,6 +30,8 @@ public class JwtAuthorizationInterceptor implements HandlerInterceptor {
         String authorization = request.getHeader("Authorization");
 
 
+
+
         log.info("url = {}", url);
         log.info("인터셉터 발동");
 
